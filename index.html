@@ -65,11 +65,11 @@
         <div class="row">
           <br>
           <div class="col-md-2">
-            <button type="button" class="btn btn-primary">Previous</button>
+            <button id="prevBtn" type="button" class="btn btn-primary" onclick="prev()">Previous</button>
           </div>
           <div class="col-md-8"></div>
           <div class="col-md-2">
-            <button type="button" class="btn btn-primary">Next</button>
+            <button id="nextBtn" type="button" class="btn btn-primary" onclick="next()">Next</button>
           </div>
         </div>          
       </div>
@@ -508,6 +508,42 @@
 
     /* the display function is called with ID 0 to render the first movie from the web page */
     display(0);
+
+    /* set prev and next buttons */
+    var currentMovie = 0
+    function setButtons() {
+      movieCnt = movieJSON.results.length;
+      
+      // disable prev when it is the first movie
+      if (currentMovie == 0)
+        document.getElementById("prevBtn").disabled = true;
+
+      // disable next when the current movie is the last one in the list 
+      if (currentMovie == movieCnt - 1)
+        document.getElementById("nextBtn").disabled = true;
+
+      // enable the prev button when the current movie is not the first one
+      if (currentMovie > 0)
+        document.getElementById("prevBtn").disabled = false;
+
+      // enable the next button when the current movie is not the last one
+      if (currentMovie < movieCnt - 1)
+        document.getElementById("nextBtn").disabled = false;
+    }
+    /* call init to disbale the buttons */
+    setButtons();
+
+    // show the next movie
+    function next() {
+      display(++currentMovie);
+      setButtons();
+    }
+
+    // show the previous movie
+    function prev() {
+      display(--currentMovie);
+      setButtons();
+    }
     </script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
