@@ -29,7 +29,7 @@
           
           <!-- box for the movie poster -->
           <div class="col-md-4">
-            <img src="https://image.tmdb.org/t/p/w500/jjPJ4s3DWZZvI4vw8Xfi4Vqa1Q8.jpg" class="img-responsive img-rounded">
+            <img id="poster" src="https://image.tmdb.org/t/p/w500/jjPJ4s3DWZZvI4vw8Xfi4Vqa1Q8.jpg" class="img-responsive img-rounded">
           </div>
           
           <!-- box for the movie rating, title and description -->
@@ -37,17 +37,17 @@
             <div class="row">
               <!-- box for the movie rating -->
               <div class="col-md-2">
-                <h3>7.2</h3>
+                <h3 id="voteAverage">7.2</h3>
               </div>
               <!-- box for the movie title and release date -->
               <div class="col-md-10">
-                <h3>Movie Title</h3>
-                <p>Release Date</p>
+                <h3 id="movieTitle">Movie Title</h3>
+                <p id="releaseDate">Release Date</p>
               </div>
             </div>
             <!-- box for the movie description -->
             <div class="row">
-              <p>
+              <p id="movieOverview">
                 Movie description blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
               </p>
             </div>
@@ -480,6 +480,22 @@
     }
   ]
 }
+
+    /* Display function that takes a movie ID (indexded into the JSON array) and updates the DOM with the JSON data */
+    function display(movieID) {
+      // get the movie data for the given ID
+      movie = movieJSON.results[movieID];
+
+      // update the DOM using the element IDs
+      document.getElementById("movieTitle").innerHTML = movie.title;
+      document.getElementById("releaseDate").innerHTML = movie.release_date;
+      document.getElementById("voteAverage").innerHTML = movie.vote_average;
+      document.getElementById("movieOverview").innerHTML = movie.overview;
+      document.getElementById("poster").src = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+    }
+
+    /* the display function is called with ID 0 to render the first movie from the web page */
+    display(0);
     </script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
